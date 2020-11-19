@@ -4,12 +4,9 @@ public class modelorders {
     String _id;
     orderId orderId;
 
-    public modelorders(String _id, orderId orderId) {
+    public modelorders(String _id, com.ali.ssbdeliveryboy.modelclasses.orderId orderId) {
         this._id = _id;
         this.orderId = orderId;
-    }
-
-    public modelorders() {
     }
 
     public String get_id() {
@@ -20,11 +17,11 @@ public class modelorders {
         this._id = _id;
     }
 
-    public orderId getOrderId() {
+    public com.ali.ssbdeliveryboy.modelclasses.orderId getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(orderId orderId) {
+    public void setOrderId(com.ali.ssbdeliveryboy.modelclasses.orderId orderId) {
         this.orderId = orderId;
     }
 }

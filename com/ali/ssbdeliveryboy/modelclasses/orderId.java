@@ -1,7 +1,7 @@
 package com.ali.ssbdeliveryboy.modelclasses;
 
 public class orderId {
-    String status,orderTime,_id,customerId,name,address,grandTotal,paymentMethod,paymentStatus,longnitude,latitude,deliveryTime;
+    String status,orderTime,_id,customerId,name,address,grandTotal,paymentMethod,paymentStatus,longnitude,latitude,deliveryTime,cell;
 
     public orderId(String status, String orderTime, String _id, String customerId, String name, String address, String grandTotal, String paymentMethod, String paymentStatus, String longnitude, String latitude) {
         this.status = status;
@@ -10,6 +10,7 @@ public class orderId {
         this.customerId = customerId;
         this.name = name;
         this.address = address;
+        this.cell = cell;
         this.grandTotal = grandTotal;
         this.paymentMethod = paymentMethod;
         this.paymentStatus = paymentStatus;
@@ -19,6 +20,16 @@ public class orderId {
     }
 
     public orderId() {
+    }
+
+
+
+    public String getCell() {
+        return cell;
+    }
+
+    public void setCell(String cell) {
+        this.cell = cell;
     }
 
     public String getDeliveryTime() {

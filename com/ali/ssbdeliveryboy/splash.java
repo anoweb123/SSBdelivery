@@ -18,7 +18,7 @@ public class splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         SharedPreferences.Editor editor=getSharedPreferences(mysharedpref,MODE_PRIVATE).edit();
-        editor.putString("ipv4","192.168.0.102");
+        editor.putString("ipv4","192.168.0.104");
         editor.putString("ontick","");
         editor.apply();
 

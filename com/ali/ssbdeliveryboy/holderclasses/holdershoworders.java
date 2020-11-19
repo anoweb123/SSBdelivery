@@ -99,7 +99,7 @@ public class holdershoworders extends RecyclerView.Adapter<holdershoworders.hold
             holder.phone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "03147569736"));
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" +list.get(position).getOrderId().getCell()));
 
                     try {
                         context.startActivity(intent);
