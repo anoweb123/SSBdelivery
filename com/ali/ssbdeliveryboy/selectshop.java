@@ -67,6 +67,7 @@ public class selectshop extends AppCompatActivity implements holdershops.onselec
             @Override
             public void onClick(View v) {
                 if (prefs.getString("ontick","").equals("")){
+                    startActivity(new Intent(selectshop.this,logindboypage.class));
                     Toast.makeText(selectshop.this, "You selected nothing", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -85,8 +86,8 @@ public class selectshop extends AppCompatActivity implements holdershops.onselec
                 listCall.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        Toast.makeText(selectshop.this, ((String.valueOf(response.code())) ), Toast.LENGTH_SHORT).show();
                         if (response.isSuccessful()){
+                            startActivity(new Intent(selectshop.this,logindboypage.class));
                             Toast.makeText(selectshop.this, "Registered", Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -17,6 +17,12 @@ import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 public class dashboard extends AppCompatActivity {
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finishAffinity();
+    }
+
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

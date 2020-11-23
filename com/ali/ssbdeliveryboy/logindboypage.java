@@ -2,6 +2,7 @@ package com.ali.ssbdeliveryboy;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ali.ssbdeliveryboy.interfaceapis.loginapi;
@@ -34,7 +36,8 @@ public class logindboypage extends AppCompatActivity {
     }
 
     private  static String mysharedpref="mysharedpref";
-    Button login;
+    CardView login;
+    TextView signuptext;
     modellogin models;
     EditText email,pass;
     String semail,spass;
@@ -46,19 +49,28 @@ public class logindboypage extends AppCompatActivity {
         setContentView(R.layout.logindboypage);
 
         bar=findViewById(R.id.bar);
-        signup=findViewById(R.id.signup);
         email=findViewById(R.id.email);
         pass=findViewById(R.id.pass);
         login=findViewById(R.id.login);
 
+        signuptext=findViewById(R.id.signupbut);
 
-        signup.setOnClickListener(new View.OnClickListener() {
+
+        signuptext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(logindboypage.this, com.ali.ssbdeliveryboy.signup.class));
+                startActivity(new Intent(logindboypage.this, signup.class));
                 overridePendingTransition( R.style.Animation_Design_BottomSheetDialog, R.style.Animation_Design_BottomSheetDialog );
             }
         });
+//
+//        signup.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(logindboypage.this, com.ali.ssbdeliveryboy.signup.class));
+//                overridePendingTransition( R.style.Animation_Design_BottomSheetDialog, R.style.Animation_Design_BottomSheetDialog );
+//            }
+//        });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,21 +108,28 @@ public class logindboypage extends AppCompatActivity {
                             sharedPreferences.putString("name",response.body().getName());
                             sharedPreferences.putString("shopid",response.body().getShopId());
                             sharedPreferences.putString("status",response.body().getStatus());
+                            sharedPreferences.putString("status","login");
                             sharedPreferences.putString("image",response.body().getImage());
                             sharedPreferences.apply();
 
-                            if (response.body().getStatus().equals("pending")){
+                            if (response.body().getStatus().equals("Pending Approval")){
                                 Toast.makeText(logindboypage.this, "Not approved yet", Toast.LENGTH_SHORT).show();
                             }
                             else {
+                                if (response.body().getStatus().equals("Rejected")){
+                                    Toast.makeText(logindboypage.this, "You are Banned", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
                             Toast.makeText(logindboypage.this, "Logged In", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(logindboypage.this, dashboard.class));
+                                }
                             }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<modellogin> call, Throwable t) {
+                        bar.setVisibility(View.INVISIBLE);
                         Toast.makeText(logindboypage.this, t.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }

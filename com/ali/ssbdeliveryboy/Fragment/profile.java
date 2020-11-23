@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -19,8 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Environment;
-import android.os.FileUtils;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,29 +28,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ali.ssbdeliveryboy.R;
-import com.ali.ssbdeliveryboy.dashboard;
 import com.ali.ssbdeliveryboy.interfaceapis.updateimageurl;
 import com.ali.ssbdeliveryboy.logindboypage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import id.zelory.compressor.Compressor;
 import okhttp3.ResponseBody;
-import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,7 +51,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
-import static android.content.Context.RECEIVER_VISIBLE_TO_INSTANT_APPS;
 import static com.ali.ssbdeliveryboy.selectshop.mysharedpref;
 
 /**
@@ -75,7 +63,7 @@ public class profile extends Fragment {
     TextView name,email,phone,address;
 
     ImageView namev,emailv,addressv,phonev,passv;
-    TextView logout;
+    TextView logout,applyforleave;
 
     String sname,sid;
     FloatingActionButton choseimg;
@@ -140,12 +128,26 @@ public class profile extends Fragment {
         phonev=view.findViewById(R.id.phoneupdate);
         passv=view.findViewById(R.id.updatepassword);
         emailv=view.findViewById(R.id.emailupdate);
+        applyforleave=view.findViewById(R.id.apply);
 
+        applyforleave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Applyforleave productfragment = new Applyforleave();
+                FragmentManager fragmentManagerpro =getActivity().getSupportFragmentManager() ;
+                FragmentTransaction fragmentTransactionpro = fragmentManagerpro.beginTransaction();
+                fragmentTransactionpro.replace(R.id.fragment, productfragment);
+                fragmentTransactionpro.commit();
+            }
+        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(),logindboypage.class));
+                SharedPreferences.Editor sharedPreferences=getContext().getSharedPreferences(mysharedpref,MODE_PRIVATE).edit();
+                sharedPreferences.putString("status","logout");
+
             }
         });
 

@@ -2,6 +2,7 @@ package com.ali.ssbdeliveryboy.holderclasses;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,9 @@ import com.ali.ssbdeliveryboy.modelclasses.modelcompleteorder;
 import com.ali.ssbdeliveryboy.modelclasses.modelorders;
 
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.ali.ssbdeliveryboy.selectshop.mysharedpref;
 
 public class holdercompletedorder extends RecyclerView.Adapter<holdercompletedorder.holder> {
     holdershoworders.onlocclick monloc;
@@ -60,11 +64,14 @@ public class holdercompletedorder extends RecyclerView.Adapter<holdercompletedor
     @Override
     public void onBindViewHolder(@NonNull holdercompletedorder.holder holder, int position) {
 
+        SharedPreferences sharedPreferences=context.getSharedPreferences(mysharedpref,MODE_PRIVATE);
+
+
         holder.name.setText("Customer: "+list.get(position).getOrderId().getName());
         holder.amount.setText("Amount: RS. "+list.get(position).getOrderId().getGrandTotal());
         holder.orderid.setText(list.get(position).getOrderId().get_id());
         holder.address.setText("Delivered at: "+list.get(position).getOrderId().getAddress());
-        holder.delboyname.setText("Delivery boy : "+list.get(position).getOrderId().getName());
+        holder.delboyname.setText("Delivery boy : "+sharedPreferences.getString("name","no name"));
         holder.orderdate.setText("Order time : "+list.get(position).getOrderId().getOrderTime().substring(0,25));
         holder.deldate.setText("Delivery time :"+list.get(position).getOrderId().getDeliveryTime().substring(0,25));
 
