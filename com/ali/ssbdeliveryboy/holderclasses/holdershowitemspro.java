@@ -2,6 +2,7 @@ package com.ali.ssbdeliveryboy.holderclasses;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,10 +44,12 @@ public class holdershowitemspro extends RecyclerView.Adapter<holdershowitemspro.
 
         SharedPreferences preferences=context.getSharedPreferences(mysharedpref,Context.MODE_PRIVATE);
         holder.title.setText(list.get(position).getProductName());
-        holder.color.setText("Color: "+list.get(position).getColor());
-        holder.price.setText("Rs. "+list.get(position).getPrice());
-        holder.size.setText("Size: "+list.get(position).getSize());
+        holder.color.setText("Color: "+list.get(position).getProductId().getColor());
+        holder.size.setText("Size:" +list.get(position).getProductId().getSize());
         holder.quan.setText("Qty: "+list.get(position).getQuantity());
+        holder.discount.setText("Rs. "+list.get(position).getProductId().getPrice());
+        holder.discount.setPaintFlags(holder.discount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        holder.price.setText("Rs. "+list.get(position).getProductId().getPromotionRate());
         Picasso.get().load(list.get(position).getImage().replaceFirst("localhost",preferences.getString("ipv4","10.0.2.2"))).networkPolicy(NetworkPolicy.NO_STORE).into(holder.imageView);
 
     }
@@ -57,7 +60,7 @@ public class holdershowitemspro extends RecyclerView.Adapter<holdershowitemspro.
     }
 
     public class holder extends RecyclerView.ViewHolder{
-        TextView title,price,quan,color,size,id;
+        TextView title,price,quan,color,size,discount;
         ImageView imageView;
         public holder(@NonNull View itemView) {
             super(itemView);
@@ -67,8 +70,8 @@ public class holdershowitemspro extends RecyclerView.Adapter<holdershowitemspro.
             price=itemView.findViewById(R.id.price);
             quan=itemView.findViewById(R.id.quan);
             color=itemView.findViewById(R.id.color);
+            discount=itemView.findViewById(R.id.discountprice);
             size=itemView.findViewById(R.id.size);
-            id=itemView.findViewById(R.id.ids);
 
         }
     }

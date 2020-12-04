@@ -147,6 +147,7 @@ public class profile extends Fragment {
                 startActivity(new Intent(getContext(),logindboypage.class));
                 SharedPreferences.Editor sharedPreferences=getContext().getSharedPreferences(mysharedpref,MODE_PRIVATE).edit();
                 sharedPreferences.putString("status","logout");
+                sharedPreferences.apply();
 
             }
         });

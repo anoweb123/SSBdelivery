@@ -114,6 +114,9 @@ public class orders extends Fragment implements holdershoworders.onlocclick,hold
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    if (t.getMessage().equals("timeout")){
+                        Toast.makeText(getContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }

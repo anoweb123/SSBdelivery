@@ -1,18 +1,17 @@
 package com.ali.ssbdeliveryboy.modelclasses;
 
 public class modelorderitem {
-String image,price,size,color,productName,quantity;
+    String image,price,size,color,productName,quantity;
+    productId productId;
 
-    public modelorderitem(String image, String price, String size, String color, String productName, String quantity) {
+    public modelorderitem(String image, String price, String size, String color, String productName, String quantity, productId productId) {
         this.image = image;
         this.price = price;
         this.size = size;
         this.color = color;
         this.productName = productName;
         this.quantity = quantity;
-    }
-
-    public modelorderitem() {
+        this.productId = productId;
     }
 
     public String getImage() {
@@ -61,5 +60,13 @@ String image,price,size,color,productName,quantity;
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
+    }
+
+    public productId getProductId() {
+        return productId;
+    }
+
+    public void setProductId(productId productId) {
+        this.productId = productId;
     }
 }
